@@ -1,6 +1,7 @@
 import statsmodels.api as sm
 import pandas as pd
 from itertools import combinations
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 
 def simple_num_model_all_combos(df, target_var):
@@ -55,6 +56,17 @@ def simple_num_model_all_combos(df, target_var):
     output_df_transposed = output_df.T
             
     return output_df_transposed.sort_values('r2_adj', ascending=False)
+
+
+
+
+
+
+
+
+
+
+
 
 
 def multi_num_model_all_combos(df, target_var):
@@ -158,3 +170,58 @@ def multi_num_model_all_combos(df, target_var):
 #             output_df_transposed[f"p_val {name}"] = np.nan
             
     return output_df_transposed, print(top_3)
+
+
+
+
+
+
+
+
+
+def base_check_for_category(df, category_column):
+    
+    '''
+    Input a dataframe and specify a target column from the dataframe. 
+    The dataframe needs to have categorical information only.
+    
+    Output is a stripplot of the category, statistics on the avg home price 
+    when grouped by the category column, and a one-hot encoded model with the 
+    first col dropped.
+    '''
+    
+# Check how the categories in the feature compare to the price distribution
+    stats = df.groupby([category_column])['price'].describe()
+    
+# Creating a chart of the column categories    
+#     temp_list = list(df[category_column].unique())
+#     sorted_list = sorted(temp_list)
+    test_df = df[category_column].sort_values()
+    
+    mean_list = []
+    for i in df.groupby([category_column])['price'].mean().sort_values().index:
+        mean_list.append(i)
+
+    fig, ax = plt.subplots(figsize=(15,10))
+    sns.stripplot(x=test_df, y=df['price'], order=mean_list, palette="tab10")
+
+    colors = ['blue', 'orange', 'green', 'red', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+    colors = colors *2
+    
+    for i, category in enumerate(mean_list):
+#         z = i+1
+        ax.axhline(y=df.groupby([category_column])['price'].mean().sort_values().values[i],
+                   color = colors[i], label = f"{category}");
+    ax.legend()
+
+# Model the category
+    y = df['price']
+    X_cat = df[[category_column]].copy()
+    X_cat['sqft_living'] = df_numeric['sqft_living'].copy()
+    X_cat = pd.get_dummies(X_cat, columns=[category_column], drop_first=True)
+
+    cat_results = sm.OLS(endog = y, exog = sm.add_constant(X_cat)).fit()
+    
+# get a summary of the model
+    cat_summary = cat_results.summary()
+    return stats, cat_results, cat_summary
