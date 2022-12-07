@@ -86,6 +86,8 @@ def multi_num_model_all_combos(df, target_var):
     
     list_of_combos = []
     p_value_good = []
+    MAE = []
+    RMSE = []
 #     target_var = 'price'
 
     function_df = df.drop([target_var], axis=1).copy()
@@ -115,6 +117,8 @@ def multi_num_model_all_combos(df, target_var):
                 if p <= .05:
                     good += 1
             p_value_good.append((good/total)*100)
+            MAE.append(mean_absolute_error(y, model.predict(sm.add_constant(X))))
+            RMSE.append(mean_squared_error(y, model.predict(sm.add_constant(X)), squared=False))
 
 
 #             if i == range(len(list_of_combos))[-1]:
@@ -125,9 +129,9 @@ def multi_num_model_all_combos(df, target_var):
 #             predictor_p_val.append(model.pvalues.values[1])
   
         
-    col_list = [column, r2, r2_adj, f_stat_p_val, const_coefs, const_p_val, p_value_good]
+    col_list = [column, r2, r2_adj, f_stat_p_val, const_coefs, const_p_val, p_value_good, MAE, RMSE]
 #                 , predictor_coef, predictor_p_val]
-    col_list_names = ['column', 'r2', 'r2_adj', 'f_stat_p_val', 'const_coefs', 'const_p_val', '%p_val < .05']
+    col_list_names = ['column', 'r2', 'r2_adj', 'f_stat_p_val', 'const_coefs', 'const_p_val', '%p_val < .05', 'MAE', 'RMSE']
 #                       , 'predictor_coef', 'predictor_p_val']
 
     output_df = pd.DataFrame(col_list, index = col_list_names)
