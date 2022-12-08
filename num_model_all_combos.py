@@ -2,6 +2,9 @@ import statsmodels.api as sm
 import pandas as pd
 from itertools import combinations
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 
 def simple_num_model_all_combos(df, target_var):
@@ -217,7 +220,7 @@ def base_check_for_category(df, category_column):
 # Model the category
     y = df['price']
     X_cat = df[[category_column]].copy()
-    X_cat['sqft_living'] = df_numeric['sqft_living'].copy()
+    X_cat['sqft_living'] = df['sqft_living'].copy()
     X_cat = pd.get_dummies(X_cat, columns=[category_column], drop_first=True)
 
     cat_results = sm.OLS(endog = y, exog = sm.add_constant(X_cat)).fit()
