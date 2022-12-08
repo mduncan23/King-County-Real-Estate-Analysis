@@ -41,6 +41,8 @@ Set 'price' as the target for our model.  Find the correlations between features
 
 ## Modles:
 1. Set up a baseline modle using  y = 'price' and X = 'sqft_living'
+![Alt Image text](data/baseline_model_outpot.jpg)
+
 
 3. 
 
