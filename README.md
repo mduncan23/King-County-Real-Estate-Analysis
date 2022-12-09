@@ -10,41 +10,66 @@ First priority is to find the most highly correlated numerical features that can
 Second priority is to find what categorical features that can be changed to increase home value.
 Third priority is to correct models assumptions.
 
+![Alt Image text](data/home_remodel.jpg)
+
 ## The Data
 King County House Sales dataset: kc_house_data.csv
 
 ## Modules:
 import numpy as np
+\
 import scipy.stats as stats
+\
 import matplotlib.pyplot as plt
+\
 import seaborn as sns
+\
 import pandas as pd
+\
 import statsmodels.api as sm
+\
 import warnings
+\
 warnings.filterwarnings('ignore')
+\
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+\
 import num_model_all_combos as simple_test
 
 ### Table of Contents:
 - Importing our Libraries
 - Importing our Data
-- initial baseline model
-- initial data cleaning
-- numerical data
-  - tests
-      - simple and multi-linear regressions
-      - scaling
-      - logging data
-      - polynomials
-  - conclusions
-- categorical data
-  - tests
-    - condition
-    - nuisance
-    - heat
-    - grade
-  - conclusions
-- final results
+- Initial Simple Linear Regression Baseline Model
+- Initial Data Cleaning
+  - Dropping Outliers in our Target
+  - Dropping Features that do not Pertain to the Business Question
+  - Dropping Outliers in our Predictor Variables
+- Numerical Data
+  - Creating a DataFrame with just continuous numerical data
+  - Second Simple Linear Regression Model (After Dropping Outliers in Sale Price)
+  - Checking for Multicollinearity
+  - Baseline Multi-Linear Regression Model
+  - Standardizing the Data to Determine Importance
+  - Checking Partial Regression Plots for our Model
+  - Checking for Linearity and Normal Distributions
+    - Log-Scaling all of the Predictor Variables
+    - Log-Scaling Target and Predictor Variables
+    - Log-Scaling the Target Variable
+- Categorical Data
+  - Setting up the Categorical DataFrame
+  - Running Models with Categorical Data
+    - Modeling Nuisance
+    - Modeling House Condition
+    - Modeling Heatsource
+    - Modeling House Grade
+- Modeling Numerical Data and Categorical Data
+  - Non-Standardized Model
+  - Standardizing the Final Model
+- Results
+  - Interpretation
+  - Recommendations
+  - Limitations
+- Additional Visualizations
 
 
 ### Initial Baseline Model
