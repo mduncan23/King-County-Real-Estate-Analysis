@@ -10,31 +10,66 @@ First priority is to find the most highly correlated numerical features that can
 Second priority is to find what categorical features that can be changed to increase home value.
 Third priority is to correct models assumptions.
 
+![Alt Image text](data/home_remodel.jpg)
+
 ## The Data
 King County House Sales dataset: kc_house_data.csv
 
-## Modles:
+## Modules:
+import numpy as np
+\
+import scipy.stats as stats
+\
+import matplotlib.pyplot as plt
+\
+import seaborn as sns
+\
+import pandas as pd
+\
+import statsmodels.api as sm
+\
+import warnings
+\
+warnings.filterwarnings('ignore')
+\
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+\
+import num_model_all_combos as simple_test
 
 ### Table of Contents:
 - Importing our Libraries
 - Importing our Data
-- initial baseline model
-- initial data cleaning
-- numerical data
-  - tests
-      - simple and multi-linear regressions
-      - scaling
-      - logging data
-      - polynomials
-  - conclusions
-- categorical data
-  - tests
-    - condition
-    - nuisance
-    - heat
-    - grade
-  - conclusions
-- final results
+- Initial Simple Linear Regression Baseline Model
+- Initial Data Cleaning
+  - Dropping Outliers in our Target
+  - Dropping Features that do not Pertain to the Business Question
+  - Dropping Outliers in our Predictor Variables
+- Numerical Data
+  - Creating a DataFrame with just continuous numerical data
+  - Second Simple Linear Regression Model (After Dropping Outliers in Sale Price)
+  - Checking for Multicollinearity
+  - Baseline Multi-Linear Regression Model
+  - Standardizing the Data to Determine Importance
+  - Checking Partial Regression Plots for our Model
+  - Checking for Linearity and Normal Distributions
+    - Log-Scaling all of the Predictor Variables
+    - Log-Scaling Target and Predictor Variables
+    - Log-Scaling the Target Variable
+- Categorical Data
+  - Setting up the Categorical DataFrame
+  - Running Models with Categorical Data
+    - Modeling Nuisance
+    - Modeling House Condition
+    - Modeling Heatsource
+    - Modeling House Grade
+- Modeling Numerical Data and Categorical Data
+  - Non-Standardized Model
+  - Standardizing the Final Model
+- Results
+  - Interpretation
+  - Recommendations
+  - Limitations
+- Additional Visualizations
 
 
 ### Initial Baseline Model
@@ -138,7 +173,7 @@ For each additional 1 square foot in basement size, we would expect the house to
 For each additional 1 square foot in garage size, we would expect the house to lose about $125
 For each additional 1 square foot in patio size, we would expect the house to gain about $155
 
-### Standardizing the Data to Determine Importance
+#### Standardizing the Data to Determine Importance
 Since our data includes variables of different scale, we need to standardize our model to determine importance. Once standardized, we can check 
 the coefficients of our variables and the predictor with the highest coefficient is the one with the greatest impact to our home value.
 
@@ -146,7 +181,7 @@ After standardizing our dataset, we are able to see that sqft_living has the hig
 
 ![Alt Image text](data/Standardizing_result.jpg)
 
-### Checking Partial Regression Plots for our Model
+#### Checking Partial Regression Plots for our Model
 Now we can check partial regression plots for our model. The goal is to show the marginal contribution of each particular predictor. These models correlate 
 with the slope of the coefficient in our standardized model. Those with a higher value for the absolute value of the slope have a larger impact on our modeling.
 
@@ -155,17 +190,90 @@ We can see that each plot shows a linear relationship with a non-zero slope mean
 ![Alt Image text](data/Partial_Regression_Plots.jpg)
 
 
-### Checking for Linearity and Normal Distributions
+#### Checking for Linearity and Normal Distributions
 Now that our data is standardized, we also run a scattermatrix of the variables to get a better visual representation of what we're working with and to 
 ensure that our data is as normal and linear as possible.
 
 ![Alt Image text](data/Checking_Linearity_Normal.jpg)
 
 
+#### Logging all of the Predictor Variables
+In an attempt to improve the linearity and normalcy of our dataset, we log all of our predictor values and run the scattermatrix to compare to our previously
+standardized data.
+
+Our data is much less linear than before scaling and we are unable to run our model for any of the predictor variables due to NaNs that appeared after taking 
+the log of our predictor variables. This is not a good approach and we will not be prusuing this.
+
+![Alt Image text](data/log_price_sqft_living_model.jpg)
+![Alt Image text](data/log_price_numerical_model.jpg)
+
+#### Categorical Data
+Now that we have a good baseline for our simple and multi-linear regressions when looking at just numerical data, we can take a look at our categorical data 
+and model the results.
+
+##### Start with the condition of the house
+
+1 = Poor; 2 = Fair; 3 = Average, 4 = Good, 5= Very Good
+
+###### Checking correlation between condition and price
+![Alt Image text](data/condition.jpg)
+
+###### Model result
+![Alt Image text](data/price_condition_model.jpg)
+
+###### Lets try looking at nuisance: Correlation and Model Result
+![Alt Image text](data/price_nuisance.jpg)
+![Alt Image text](data/price_sqftliving_nuisance_model.jpg)
+
+###### Lets try looking at heatsource: Correlation and Model Result
+![Alt Image text](data/price_heatsource_corr.jpg)
+![Alt Image text](data/price_sqftliving_heatsource_model.jpg)
+
+###### Grade: Correlation and Model Result
+![Alt Image text](data/grade_chart.jpg)
+![Alt Image text](data/price_sqftliving_grade_model.jpg)
+
+###### Bedroom: Correlation and Model Result
+![Alt Image text](data/price_bedroom_corr.jpg)
+![Alt Image text](data/price_sqftliving_bedroom_model.jpg)
+
+
+### Now running categories along with multilinear regression
+![Alt Image text](data/all_cat_model.jpg)
+
+
+## Results
+the model explains about 52.3% of the variance in the data overall
+the model is statistically significant
+p-values for all numeric feature coeficients are statistically significant
+p-values for 4 of the 11 grades are statistically significant
+The MAE for our final model came in at a variance of about $326,782 dollars
+
+## Interpretation
+When looking at the standardized model, we see that sqft living and basement sq ft have the highest coef
+
+This means that they will have the most drastic change to the model at scale and should be prioritized
+when we look at our regular model we can get some good interpretation taking everything else into consideration
+
+given a substandard quality house with no bedrooms, no living sq ft, and no basement sqft, we would expect the house to be priced about $214,100
+for every increase in bedroom by 1, we would expect the house value to drop by $28,320
+for every increase in 1 square ft of living area, we would expect the house value to increase by about $281
+for every increase in 1 square ft of basement area, we would expect the house value to increase by about $107
+We see statistically significant coefficients for building grade which represents the construction quality of improvements. We see that compared to a substandard 
+home:
+
+'very good' quality improvements would increase home value by about $1,102,000
+'Excellent' quality improvements would increase home value by about $1,669,000
+'Luxury' quality improvements would increase home value by about $2,034,000
+'Mansion' quality improvements would increase home value by about$2,185,000
+Recommendations
+We recomment increasing the size of your home as the greatest impact to your renovation, first focusing on the total living area sq ft, then looking at basement 
+area sq foot as a secondary (obviously this would be much more expensive then building above ground too)
+We recommend spending the extra dollars for quality craftsmanship as these pay off in the long run with vastly greater home values
 
 
 
-## Conclusions and Recommendations
+## Final Conclusions and Recommendations
 
 
 
