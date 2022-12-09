@@ -13,7 +13,17 @@ Third priority is to correct models assumptions.
 ## The Data
 King County House Sales dataset: kc_house_data.csv
 
-## Modles:
+## Modules:
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import statsmodels.api as sm
+import warnings
+warnings.filterwarnings('ignore')
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+import num_model_all_combos as simple_test
 
 ### Table of Contents:
 - Importing our Libraries
