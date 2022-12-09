@@ -139,13 +139,26 @@ when we look at our regular model we can get some good interpretation taking eve
 
 
 ### Recommendations
-- We recommend increasing the living area square footage of a home as the greatest impact to the renovation.
+Based on the data we gathered, we have several recommendations on how to best renovate houses to increase sale price. First off, we recommend prioritizing the
+square footage of living space as this is one of the most important features in increasing sale price. For every 100 square foot increase in living area you can
+expect to see on average a $29,000 increase in sale price. You can increase the living square footage of a home by adding a new section to the house that expands
+the kitchen or living room areas, as well as by finishing a previously unfinished basement.
 
-- We recommend spending the extra dollars during renovation for quality craftsmanship. Increasing the grade of a home is shown to pay off in the long run with vastly greater home values than homes with lower grades.
+For higher end homes we recommend increasing the building grade of the home, specifically reaching at least the very good benchmark. Going from a fair building
+grade to the very good grade will add an average of about 950,000 dollars to the sale price of the home and each additional building grade increase after the 
+very good tier will add hundreds of thousands of dollars to the house’s sale price.
+
+Finally we recommend adding a patio to houses that do not already have one as adding even just an average sized patio of about 50 square feet will on average
+increase the houses sale price by $8,500. Renovating a patio is also one of the cheapest and most cost efficient forms of renovation as many skilled homeowners
+can even complete this project themselves without needing to hire an outside company.
 
 
 ## Next steps
-- Our data was only for homes sold between June of 2021 and June of 2022, given the state of the realty market during this post-pandemic time, its not surprising that there was a lot of unexplained variance in the model. 
-    - With more data from years prior to the pandemic, we believe that would could find a more highly correlated model
-- Given the timeframe for this report, we were not able to look at features that were not able to be renovated.
-    - With more time, we could model additional features to get a better understanding of their impact on variance
+Besides our recommendations we also have some additional information and next steps we believe may be useful to you as well. While our model focused solely on
+house features that can be renovated there are other features that impact a house’s sale price. Waterfront availability and the house’s location specifically, 
+and while these aren’t features that can be changed through renovation it is important to be aware of their existence and their impact on price.
+
+For your next steps we would recommend reaching out to a contractor to get a quote on the cost of your desired renovations. Then you can compare the renovation
+cost to the information we have provided, detailing the sale price increase for renovations. Doing so will give you the total profit your renovations would 
+provide.
+
