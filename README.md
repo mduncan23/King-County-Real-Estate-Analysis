@@ -29,7 +29,7 @@ We set 'price' as the target variable for our model.  The predictor variable wit
 
 To get an initial understanding of our data, we built a baseline simple linear regression model utilizing the feature `sqft_living` since it has the highest correlation to our target feature: price.
 
-![Alt Image text](data/baseline_model_outpot.jpg)
+Our first simple-linear regression model has an R-squared value of .37. This model represents only 37% of the variance found in housing prices. Our model is statistically significant with an F-statistic p-value less than our alpha of 0.05. The constant coefficient and predictor variable coefficient are also statistically significant when compared to our alpha.
 
 ### Initial Data Cleaning
 
@@ -59,8 +59,6 @@ We needed to run a second simple linear regression model after dropping our outl
 
 Now that the outliers in price have been dropped, our simple linear regression model has an R-squared value of .42, increased from the baseline results of .37.
 
-![Alt Image text](data/2nd_Simple_Linear_Regression_Model.jpg)
-
 
 ### Baseline Multi-Linear Regression Model
 Now that our data has been cleaned, we have our improved simple linear regression model, and we have dropped features that are highly correlated in an attempt to reduce multicollinearity, we can check our results using multi-linear regression. 
@@ -71,7 +69,6 @@ We found that the combination of 6 of the remaining predictor variables has the 
 
 We did not choose the absolute highest adjusted R-squared value because not all p-values are statistically significant in the model and they have nearly identical adjusted R-squared values.
 
-![Alt Image text](data/Baseline_Multi_Linear_Regression_Model.jpg)
 
 #### Results of model:
 - Our model explains about 44.1% of the variance in our data
@@ -92,7 +89,7 @@ with the slope of the coefficient in our standardized model. Those with a higher
 
 We can see that each plot shows a linear relationship with a non-zero slope meaning that it is beneficial to add each of these features to the model.
 
-![Alt Image text](data/Partial_Regression_Plots.jpg)
+![Alt Image text](data/Regression_plots_final.jpg)
 
 
 #### Categorical Data
@@ -100,11 +97,12 @@ Now that we have our categorical data in place, we can begin running models on e
 
 ###### Grade: Correlation and Model Result
 ![Alt Image text](data/grade_chart.jpg)
-![Alt Image text](data/price_sqftliving_grade_model.jpg)
 
 
-### Now running categories along with multilinear regression
-![Alt Image text](data/all_cat_model.jpg)
+
+### Modeling Numerical Data and Categorical Data
+Now that we have determined the numerical and categorical features with the greatest impact to the relevance of our model, we can add them together for our final model.
+![Alt Image text](data/final_model.jpg)
 
 
 ## Results
