@@ -1,7 +1,7 @@
 # King-County-Real-Estate-Analysis
 # Renovation And House Price
 
-Presented by Matthew Duncan, Leif Schultz, and Jasmine Huang
+**Authors**: [Matthew Duncan](mailto:mduncan0923@gmail.com), Leif Schultz, and Jasmine Huang
 
 ## Overview
 We analyzed data from the King County, WA housing dataset to determine which house features renovations would add the most value to a house.
@@ -160,3 +160,36 @@ For your next steps we would recommend reaching out to a contractor to get a quo
 cost to the information we have provided, detailing the sale price increase for renovations. Doing so will give you the total profit your renovations would 
 provide.
 
+## For More Information
+
+See the full analysis in the [Jupyter Notebook](./King_County_Renovation_Notebook.ipynb) or review this [presentation](./King_County_Renovation_Presentation.pdf).
+
+**For additional info, contact:**
+- Matthew Duncan: mduncan0923@gmail.com
+
+![Alt Image text](data/home_remodel.jpg)
+
+## Repository Structure
+
+```
+├── Scratch Notebooks
+│   ├── Jasmine Project Workbook-Copy1.ipynb
+│   ├── Leif new working copy.ipynb
+│   ├── Matt Project Workbook.ipynb
+│   ├── kc_house_data.csv
+├── data
+│   ├── House_Price_Increase.jpg
+│   ├── Regression_plots_final.jpg
+│   ├── baseline_model_outpot.jpg
+│   ├── column_names.md
+│   ├── final_model.jpg
+│   ├── grade_chart.jpg
+│   ├── home_remodel.jpg
+│   ├── kc_house_data.csv
+│   ├── line_sqft_vs_price.jpg
+│   └── price_bedroom_corr.jpg
+├── King_County_Renovation_Notebook.ipynb
+├── num_model_all_combos.py
+├── King_County_Renovation_Presentation.pdf
+└── README.md
+```
